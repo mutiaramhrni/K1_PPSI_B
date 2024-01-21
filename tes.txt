@@ -1,0 +1,261 @@
+//layout content
+<div class="wrapper-postingan">
+  <% forms.forEach(form => { %>
+  <div href="/submit-form/<%= form.form_id %>" class="postingan">
+    <i class="bi bi-folder"></i>
+    <a href=""> Dasar - Dasar Pemograman</a>
+  </div>
+  <% }); %>
+</div>
+
+// notifikasi
+<!-- <% if (successMessage) { %>
+  <figure class="notification_success">
+    <div class="notification_body">
+      <i class="bi bi-check-circle notification_icon"></i>
+      Your form has been created &#128640;
+    </div>
+  </figure>
+<% } else if (errorMessage) { %> 
+  <figure class="notification_fail">
+    <div class="notification_body">
+      <i class="bi bi-x-circle notification_icon"></i>
+      Your form failed to be created 
+    </div>
+  </figure>
+<% } %> -->
+
+//Form pencarian
+        <form 
+        style="height:100%;display: flex;
+        flex-direction: row;justify-content: center;
+        gap:5px;align-items: center;margin-right: 30px;"
+        class="form-enroll"
+         action="/enroll" method="post">
+          <input 
+          style="border:1px solid #ccc;
+          outline:none;
+          border-radius:3px;padding:5px 10px;
+          width:90px;font-size:12px;"
+          type="text"
+           name="enroll_key" 
+           placeholder="Enter Code">
+          <button 
+          style=" border:0;
+          background-color: #12CBC4;
+          border-radius:3px;
+          color:#fff;width:60px;font-size:12px;height:29px;"
+          class="btn-enroll" 
+          type="submit">Enroll</button>
+        </form>
+
+
+//buat folder penampung file jika tidak ada
+if (!fs.existsSync('./uploads')) {
+  fs.mkdirSync('./uploads');
+}
+
+// middleware untuk parsing request body
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+
+app.set('views', path.join(__dirname, '/views'));
+
+app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
+app.use('/img', express.static(path.resolve(__dirname, "assets/img")));
+app.use('/submission', express.static('/img'));
+
+// template engine
+app.set('view engine', 'ejs')
+
+// layout ejs
+app.use(expressLayouts);
+
+// mengatur folder views
+app.set('views', './views');
+// Middleware session
+app.use(session({
+  secret: 'your-secret-key',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// Middleware flash messages
+app.use(flash());
+
+// Create multer storage configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+// Create multer upload configuration
+const upload = multer({ storage: storage });
+
+
+const saltRounds = 10;
+// Function to generate enroll key with specified length
+function generateEnrollKey(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let enrollKey = '';
+  for (let i = 0; i < length; i++) {
+    enrollKey += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return enrollKey;
+}
+//register dan login
+app.get('/register', function (req, res) {
+  const errorMessage = req.session.errorMessage;
+  req.session.errorMessage = ''; // Clear the error message from session
+  const successMessage = req.session.successMessage;
+  req.session.successMessage = '';
+  res.render('register',{
+    title:'Register',
+    layout:'layouts/auth-layout',
+    errorMessage : errorMessage,
+    successMessage : successMessage
+  });
+})
+
+app.post('/register', function (req, res) {
+  const { email, username, password, confirm_password } = req.body;
+
+  // check if username already exists
+  const sqlCheck = 'SELECT * FROM users WHERE username = ?';
+  db.query(sqlCheck, username, (err, result) => {
+    if (err) throw err;
+      console.log("tes");
+    if (result.length > 0) {
+      console.error({ message: 'Username sudah terdaftar', err });
+      req.session.errorMessage = 'Username sudah terdaftar';
+      return res.redirect('/register');
+    }
+
+    if (password !== confirm_password) {
+      console.error({ message: 'Password tidak cocok!', err });
+      req.session.errorMessage = 'Password tidak cocok!';
+      return res.redirect('/register');
+    }
+
+    // hash password
+    bcrypt.hash(password, saltRounds, function(err, hash) {
+      if (err) throw err;
+
+      // insert user to database
+      const sqlInsert = "INSERT INTO users (email, username, password, active, avatar) VALUES (?, ?, ?, 0, '')";
+      const values = [email, username, hash];
+      db.query(sqlInsert, values, (err, result) => {
+        if (err) throw err;
+        console.log({ message: 'Registrasi berhasil', values });
+        res.redirect('/login');
+      });
+    });
+  });
+});
+
+
+// login page
+app.get('/login', function (req, res) {
+  const errorMessage = req.session.errorMessage;
+  req.session.errorMessage = ''; // Clear the error message from session
+  const successMessage = req.session.successMessage;
+  req.session.successMessage = '';
+  res.render('login',{
+    title:'Login',
+    layout:'layouts/auth-layout',
+    errorMessage : errorMessage,
+    successMessage : successMessage
+  });
+})
+
+app.post('/login', function (req, res) {
+  const { username, password } = req.body;
+  const sql = 'SELECT * FROM users WHERE username = ?';
+  db.query(sql, [username], function(err, result) {
+    if (err) {
+      console.error({ message: 'Internal Server Error', err });
+      req.session.errorMessage = 'Internal Server Error';
+      return res.redirect('/login');
+    }
+    if (result.length === 0) {
+      console.error({ message: 'Username atau Password salah!!', err });
+      req.session.errorMessage = 'Username atau Password salah!!';
+      return res.redirect('/login');
+    }
+
+    const user = result[0];
+
+    // compare password
+    bcrypt.compare(password, user.password, function(err, isValid) {
+      if (err) {
+        console.error({ message: 'Internal Server Error', err });
+        req.session.errorMessage = 'Internal Server Error';
+        return res.redirect('/login');
+      }
+
+      if (!isValid) {
+        console.error({ message: 'Username atau Password salah!!', err });
+        req.session.errorMessage = 'Username atau Password salah!!';
+        return res.redirect('/login');
+      }
+
+      // generate token
+      const token = jwt.sign({ user_id: user.user_id }, 'secret_key');
+      res.cookie('token', token, { httpOnly: true });
+
+      console.log({ message: 'Login Berhasil', user });
+      return res.redirect('/');
+    });
+  });
+});
+
+// logout
+app.get('/logout', function(req, res) {
+  res.clearCookie('token');
+  res.redirect('/login');
+});
+
+// middleware untuk memeriksa apakah user sudah login atau belum
+// function requireAuth(req, res, next) {
+//   const token = req.cookies.token;
+//   if (!token) {
+//     res.redirect('/login');
+//     return;
+//   }
+  
+
+//   jwt.verify(token, 'secret_key', function(err, decoded) {
+//     if (err) {
+//       res.redirect('/login');
+//       return;
+//     }
+
+//     req.user_id = decoded.user_id;
+//     next();
+//   });
+// }
+
+
+
+<% if (user.sign_img) { %>
+          <img src="./img/<%= user.sign_img %>" alt="sign-picture" id="sign-image" class="sign-picture" >
+        <% } else { %>
+          <img src="./img/sign.png" alt="sign-picture" id="sign-image" class="sign-picture" >
+        <% } %>
+
+
+
+        <% if (enroll.rows === 0) { %>
+          <a href="/detailKelas/<%= kelas.slug_kelas %>" class="enter-enroll-a">Masuk</a>
+        <% } else { %>
+          <form action="/enroll" method="post" class="form-enroll">
+            <input class="enroll-input" type="text" name="enroll_key" placeholder="Enter enroll key">
+            <button type="submit" class="enter-enroll">Enter</button>
+          </form>
+        <% } %>

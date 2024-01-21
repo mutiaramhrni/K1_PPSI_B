@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Macondo&family=Merriweather:wght@300;700&family=Montserrat:wght@500&family=Neonderthaw&family=Pacifico&family=Paytone+One&family=Plus+Jakarta+Sans:wght@800&family=Poppins:wght@300&family=Raleway:wght@200;400&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family:'poppins';
+}
+
+body{
+  width:100%;
+  min-height:100vh;
+  background: #868686;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper-auth {
+  width: 800px;
+  margin: 80px auto;
+  background-color: #D9E2E9;
+  border-radius: 15px;
+  padding: 50px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.wrapper-auth .title {
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-bottom:20px;
+}
+
+.wrapper-auth .title p{
+  color:#9d9c9c;
+  margin-top:-5px;
+  margin-left:5px;
+  font-size:15px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button[type="submit"] {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration:none;
+  background:#5890ac;
+  color: #fff;
+  transition:.2s;
+}
+
+button[type="submit"]:hover{
+  background-color: 	#436d83; 
+}
+
+.bottom-auth{
+  width: 100%;
+  display:grid;
+  place-content: center;
+  margin-top:25px;
+}
+
+.bottom-auth span{
+  font-size: 14px;
+}
+
+.btn-bottom-auth{
+  text-decoration: none;
+  font-weight: bold;
+  color:	#708090;
+  font-size: 14px;
+  margin-left:5px;
+  transition:.2s;
+}
+
+.btn-bottom-auth:hover{
+  color:	#708090;
+}
+
+.input-container {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-bottom: 1px solid #dfdfdf;
+  outline: none;
+}
+
+.input-container label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 14px;
+  padding: 10px;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.input-container input:focus ~ label,
+.input-container input:valid ~ label {
+  top: -20px;
+  font-size: 12px;
+  color: 	#5890ac;
+}
+
+
+.alert{
+display:flex;
+justify-content:space-between;
+}

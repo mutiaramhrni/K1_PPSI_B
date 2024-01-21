@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/profil.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <section>
+      <header>
+        <div class = "brand"> 
+          <span>
+            <img src="/img/unand.png" height="90px" >
+          </span>
+          <span class="wrapper-brand"> 
+            <span class="Ep">
+            E-Project  
+            </span>
+            <br>
+            <span class="Er">
+            <p>Repository Platform from Andalas University's FTI Information System</p>
+            </span>
+          </span>
+        </div>
+        <nav>
+         
+         <a href="/">Home</a>
+         <a href="/aboutus">About Us</a>
+          <a href="/propil">Profil</a>
+          <a href="/logout" class="text-danger">log out</a>
+        </nav>
+      </header>
+        <main>
+            <div class="container-main">
+              <%- body %>
+            </div>
+        </main>
+    </section>
+
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+<!-- drop file -->
+<script>
+  const dropArea = document.getElementById('drop-area');
+  const fileInput = document.getElementById('file-input');
+  const fileList = document.getElementById('file-list');
+
+  dropArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropArea.style.borderColor = '#333';
+  });
+
+  dropArea.addEventListener('dragleave', () => {
+      dropArea.style.borderColor = '#ccc';
+  });
+
+  dropArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropArea.style.borderColor = '#ccc';
+      const files = e.dataTransfer.files;
+      handleFiles(files);
+  });
+
+  fileInput.addEventListener('change', () => {
+      const files = fileInput.files;
+      handleFiles(files);
+  });
+
+  function handleFiles(files) {
+            fileList.innerHTML = '';
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const listItem = document.createElement('div');
+                listItem.innerHTML = `
+                <i style="font-size:20px;color:#565b5e;margin-right:10px;" class="bi bi-file-zip-fill"></i>
+                 ${file.name}
+                <i style="margin-left:10px;color:#5890ac;" class="bi bi-check-circle-fill"></i>`;
+                fileList.appendChild(listItem);
+            }
+        }
+</script>
+
+<!-- preview avatar di profil -->
+<script>
+  const fileUpAv = document.getElementById('file-upload-avatar');
+    const avatar = document.getElementById('avatar-preview');
+  
+    fileUpAv.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+  
+      reader.onload = (e) => {
+        avatar.src = e.target.result;
+      };
+  
+      reader.readAsDataURL(file);
+    });
+  </script>
+
+</body>
+
+
+</html>

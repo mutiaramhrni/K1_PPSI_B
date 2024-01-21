@@ -1,0 +1,22 @@
+<form class="form-pencarian" action="/search-kelas" method="get">
+  <input type="text" name="query_kelas" placeholder="Search..">
+  <button type="submit">Search</button>
+</form>
+<% if (results.length === 0) { %>
+  <p style="text-align:center;">No results found.</p>
+  <% } else { %>
+    <div class="wrapper-projects">
+      <% results.forEach(function(result) { %>
+        <div class="row-project row-user-projects">
+          <a href="/detailKelas/<%= result.slug_kelas %>" class="title"><%= result.matkul %></a>
+          <div class="row-user"> 
+            <a href="/detailKelas/<%= result.slug_kelas %>" class="enter-enroll-a">Masuk</a>
+          </div>
+        </div>
+        
+      <% }); %>
+    </div>
+  <% } %>
+  
+  
+  

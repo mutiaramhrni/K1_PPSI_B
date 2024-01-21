@@ -1,0 +1,125 @@
+.wrapper-upload {
+  background-color: #fff;
+  display: flex;
+  padding:10px;
+  width:100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-upload-container {
+  background-color: #fff;
+  padding: 20px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+#drop-area {
+  border: 2px dashed #e8e8e8;
+  border-radius: 3px;
+  width:400px;
+  height:300px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition:.2s;
+}
+
+#drop-area:hover{
+  background-color: #ececec;
+}
+
+#drop-area i{
+  font-size:60px;
+  color:#5890ac;
+}
+
+#file-input {
+  display: none;
+}
+
+#file-label{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#file-label .drop{
+  font-size: 18px;
+  color:#272727;
+  font-weight: 600;
+  margin-bottom:-15px;
+}
+
+#file-label .or{
+  font-size: 16px;
+  color:#7b7b7b;
+  margin-top:-5px;
+}
+
+#file-label .browse-files{
+  font-size: 16px;
+  color:#fff;
+  padding:10px;
+  width:150px;
+  border-radius:3px;
+  background-color: #5890ac;
+  margin-top:-15px;
+}
+
+#file-list{
+  width: 100%;
+  padding:20px;
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left:0;
+}
+
+.btn-item{
+  width: 441px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit{
+  border:0;
+  width:100%;
+  height:35px;
+  border-radius:2px;
+  background-color:#5890ac;
+  color:#fff;
+  transition: text-shadow .2s ease;
+  transition:.2s;
+}
+
+.btn-submit:hover{
+  background-color:#48758c;
+  color:#ffffff;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+}
+
+
+
+.float-btn a{
+  text-decoration: none;
+  font-size:30px;
+  color:#5890ac;
+  padding:0px 10px;
+  border-radius: 50%;
+  box-shadow: rgba(48, 48, 48, 0.15) 0px 1px 3px 0px;
+  transition:.2s;
+}
+
+.float-btn a:hover{
+  color:#3c6071;
+  box-shadow: rgba(48, 48, 48, 0.15) 0px 3px 6px 0px;
+}

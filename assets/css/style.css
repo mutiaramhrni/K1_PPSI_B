@@ -1,0 +1,477 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Macondo&family=Merriweather:wght@300;700&family=Montserrat:wght@500&family=Neonderthaw&family=Pacifico&family=Paytone+One&family=Plus+Jakarta+Sans:wght@800&family=Poppins:wght@300&family=Raleway:wght@200;400&display=swap");
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #3c5a67 #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #3c5a67;
+    border-radius: 10px;
+    border: 3px solid #ffffff;
+  }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family:'montserrat';
+}
+
+body {
+  width: 100%;
+  overflow: scroll;
+  
+}
+
+section{
+  position: relative;
+}
+
+main{
+    width: 100%;
+    padding-bottom: 200px;
+    overflow-y:scroll;
+    background-color: #fff;
+    transition:.2s;
+    display:flex;
+    justify-content:center;
+    align-items:start;
+    margin-top:20px;
+
+}
+
+.container-main{
+  width:95%;
+  padding:15px;
+}
+
+.form-pencarian{
+  width: 100%;
+  padding:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  
+}
+
+.form-pencarian input{
+  width: 70%;
+  padding:10px;
+  padding-left:20px;
+  border-radius:25px;
+  color:#272727;
+  font-size:15px;
+  outline:none;
+  border:0;
+  background-color: #eaf0f3;
+}
+.form-pencarian button{
+  border:0;
+  width:120px;
+  height:43px;
+  border-top-right-radius:25px;
+  border-bottom-right-radius:25px;
+  background-color: #5890ac;
+  color:#fff;
+  margin-left:-121px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.form-pencarian button:hover{
+  background-color: #48758c;
+}
+
+.wrapper-postingan{
+  display: flex;
+  flex-direction: column;
+  width : 100%;
+  padding : 35px;
+  padding-bottom:60px;
+  background:#fff;
+  border-radius:5px;
+  box-shadow: rgba(48, 48, 48, 0.15) 0px 1px 3px 0px;
+}
+
+.postingan{
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  justify-content: space-between;
+  gap:25px;
+  border-bottom:1px solid #dfdddd;
+  padding:15px;
+  border-radius: 4px;
+  transition:.3s
+}
+.postingan:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px 0px;
+  background-color: #eee;
+}
+
+.postingan i{
+  font-size:21px;
+  color:#565b5e;
+}
+.postingan a{
+  text-decoration:none;
+  font-size:15px;
+  color:#272727;
+  font-weight:500;
+}
+
+.nama-folder{
+  font-size:20px;
+  margin:15px;
+  font-weight:600;
+  font-family: 'poppins';
+}
+
+.wrapper-new{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap:15px;
+  margin-bottom:10px;
+}
+
+.title-detailKelas p{
+  margin:0;
+}
+
+
+.new-project{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  border-radius:25px;
+  width:100%;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px 0px;
+  padding:0px 15px;
+  text-decoration: none;
+  color:#5890ac;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.bi-plus{
+  font-size:25px;
+  margin-right:5px;
+  color:#5890ac;
+}
+
+/* .wrapper-items{
+  display: flex;
+  justify-content: start;
+  align-items:center;
+  flex-direction: column;
+  gap:20px;
+  width : 100%;
+  height: 100vh;
+  padding : 35px;
+}
+
+.item{
+  width:100px;
+  height: 30vh;
+  background:#EBF0F2;
+  border-radius: 20px;
+} */
+
+.wrapper-items {
+  display: flex;
+  justify-content: start;
+  align-items:center;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  height: 100vh;
+  padding: 50px;
+}
+
+.item {
+  background: #EBF0F2;
+  border-radius: 20px;
+  padding: 25px; 
+  width: 750px; 
+  display:flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.item-content {
+  display: flex;
+  align-items:center;
+}
+
+.item img {
+  width: 130px;
+  height: 130px;
+  margin-right: 15px;
+}
+
+.item-text {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+}
+
+.item span {
+  font-size: 20px;
+}
+
+.item a{
+    padding:4px 12px;
+    border-radius:2px;
+    background-color:#5890ac;
+    color:#fff;
+    text-decoration: none;
+    transition:.2s;
+    margin-top: 3px;
+    font-size: 20px;
+
+  }
+
+.container-item{
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* about us */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.about-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+h1 {
+  color: #333;
+}
+
+p {
+  color: #666;
+  margin: 10px 0;
+}
+
+.form-enroll{
+  display:flex;
+  align-items: center;
+  justify-content: start;
+  width:100%;
+}
+
+.enroll-input{
+  width:100%;
+  padding:4px;
+  padding-left:12px;
+  border:1px solid #b5b5b590;
+  border-radius: 3px;
+  outline:none;
+}
+
+.enter-enroll{
+  border:0;
+  width:60px;
+  height:33px;
+  background-color: #5890ac;
+  cursor:pointer;
+  color:#fff;
+  border-top-right-radius:3px;
+  border-bottom-right-radius:3px;
+  margin-left:-20px;
+}
+
+.enter-enroll-a{
+  text-decoration: none;
+  border:0;
+  padding:4px 12px;
+  background-color: #5890ac;
+  cursor:pointer;
+  color:#fff;
+  border-radius:3px;
+}
+
+.wrapper-projects{
+  padding-top:50px;
+  width:100%;
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  grid-gap: 30px;
+  margin: 0 auto;
+  place-content: start;
+}
+
+.row-project{
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.1) 2px 4px 8px;
+  border-radius: 5px;
+  padding:20px;
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+  justify-content: start;
+  align-items: start;
+  transition:.2s;
+}
+
+.row-project:hover{ 
+  box-shadow: rgba(172, 171, 171, 0.3) 0px 9px 28px, rgba(172, 171, 171, 0.22) 0px 7px 6px;
+}
+
+
+.row-project .title{
+  text-decoration: none;
+  font-size:16px;
+  font-weight: 600;
+  color:#5890ac;
+  font-family: 'Lexend Deca', sans-serif;
+  transition:.2s;
+}
+
+
+.row-project .title:hover{
+  color:#395d6f;
+}
+
+.row-project .subtitle{
+  font-size:12px;
+  color:#252727;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 300px;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+.wrapper-postingan{
+  display: flex;
+  flex-direction: column;
+  width : 100%;
+  padding : 35px;
+  padding-bottom:60px;
+  background:#fff;
+  border-radius:5px;
+  box-shadow: rgba(48, 48, 48, 0.15) 0px 1px 3px 0px;
+}
+
+.postingan{
+  display:flex;
+  flex-direction:row;
+  align-items: center;
+  gap:25px;
+  border-bottom:1px solid #dfdddd;
+  padding:15px;
+  border-radius: 4px;
+  transition:.3s
+}
+.postingan:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px 0px;
+  background-color: #eee;
+}
+
+.postingan i{
+  font-size:21px;
+  color:#565b5e;
+}
+.postingan a{
+  text-decoration:none;
+  font-size:15px;
+  color:#272727;
+  font-weight:500;
+}
+
+.nama-folder{
+  font-size:20px;
+  margin:15px;
+  font-weight:600;
+  font-family: 'poppins';
+  color:#5890ac;
+}
+
+.bi-plus{
+  font-size:25px;
+  margin-right:5px;
+  color:#5890ac;
+}
+
+.wrapper-buat-kelas{
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  padding:40px;
+  margin-bottom:300px;
+  border-radius:3px;
+}
+
+.form-buat-kelas{
+  width:100%;
+}
+
+.form-buat-kelas h5{
+  font-size:24px;
+  font-weight:bold;
+}
+
+.form-buat-kelas input{
+  width:100%;
+  padding:4px;
+  padding-left:12px;
+  border:1px solid #b5b5b590;
+  border-radius: 3px;
+  outline:none;
+}
+
+.form-buat-kelas button{
+  border:0;
+  width:100px;
+  height:35px;
+  background-color: #5890ac;
+  cursor:pointer;
+  color:#fff;
+  border-radius:3px;
+}
+.btn-cancel{
+  text-decoration: none;
+  color:red;
+  margin-right:12px;
+}
+
+
+
+
+.nilai-project{
+  text-decoration: none;
+  padding:2px;
+  color:rgb(11, 176, 129);
+  font-weight: 600;
+  transition:.2s;
+}
+
+.nilai-project:hover{
+  color:#315668;
+}

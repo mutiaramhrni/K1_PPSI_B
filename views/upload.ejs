@@ -1,0 +1,22 @@
+<form class="wrapper-upload" action="/upload-file" method="post" enctype="multipart/form-data">
+  <div class="file-upload-container">
+    <input type="hidden" name="id_kelas" value="<%= kelas.id_kelas %>">
+    <div id="drop-area">
+      <i class="bi bi-cloud-arrow-up"></i>
+        <label for="file-input" id="file-label">
+          <span class="drop">Drag & Drop files here</span>
+          <br> <span class="or">or</span> <br>
+          <span class="browse-files">Browse files</span>
+        </label>
+        <input name="file" type="file" id="file-input" multiple>
+    </div>
+    <div id="file-list"></div>
+  </div>
+  <div class="btn-item m-3">
+    <button type="submit" class="btn-submit">Upload</button>
+  </div>
+</form>
+
+
+
+

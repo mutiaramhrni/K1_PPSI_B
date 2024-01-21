@@ -1,0 +1,116 @@
+
+<div class="wrapper-dashboard">
+  <aside>
+    <li>
+      <i class="bi bi-grid-1x2-fill"></i>
+      <a href="/dashboard">Kelola User</a>
+    </li>
+    <li>
+      <i class="bi bi-door-open-fill"></i>
+      <a href="/kelola-kelas">Kelola Kelas</a>
+    </li>
+    <li>
+      <i class="bi bi-cast"></i>
+      <a href="/kelola-projek">Kelola Projek</a>
+    </li>
+  </aside>
+  <main>
+    <style>
+      table thead tr th{
+        color:#4e5277;
+      }
+      .card-footer nav ul li a{
+        color:#4e5277;
+      }
+    
+      .btn-submit-table{
+        background-color:#48758c;
+        transition:.2s;
+      }
+      .btn-submit-table:hover{
+        background-color:#335362;
+      }
+
+      tbody tr{
+        font-size:12px;
+      }
+    </style>
+    <div class="card shadow mb-4 wrapper-table-content w-100">
+      <div class="card-header py-3" style="width: 100%; display: flex; justify-content: space-between;">
+          <div>
+            <form action="/search-in-table" method="get">
+              <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                  <label class="border-0 px-0" style="color:#48758c;">Search: </label>
+                </div>
+                <div class="col-auto">
+                  <input type="text" name="search" id="search" class="form-control" >
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-submit-table text-white">Search</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div>
+            <a href="/tambah-user" class="btn btn-success">Tambah User</a>
+          </div>
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Username</th>
+                          <th>Role</th>
+                          <th>Email</th>
+                          <th>Created At</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <% items.forEach(item => { %>
+                      <tr>
+                          <td><%= item.id_user %></td>
+                          <td><%= item.username %></td>
+                          <td><%= item.role %></td>
+                          <td><%= item.email %></td>
+                          <td><%= moment(item.created_at).format('LL LT') %></td>
+                          <td>
+                            <a href="/edit-user-dashboard/<%= item.id_user %>"  class="badge text-bg-info text-white text-decoration-none">Edit</a>
+                            <a href="/delete-user-dashboard/<%= item.id_user %>" onclick="return confirmDelete()" class="text-decoration-none badge text-bg-danger">Delete</a>
+                          </td>
+                      </tr>
+                      <% }); %>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="card-footer" >
+        <nav aria-label="Table Navigation">
+          <ul class="pagination justify-content-end">
+            <li class="page-item <%= currentPage === 1 ? 'disabled' : '' %>">
+              <a class="page-link" href="?page=<%= currentPage - 1 %>" tabindex="-1">Previous</a>
+            </li>
+            <% for(let i = 1; i <= totalPages; i++) { %>
+              <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+                <a class="page-link mx-2" href="?page=<%= i %>"><%= i %></a>
+              </li>
+            <% } %>
+            <li class="page-item <%= currentPage === totalPages ? 'disabled' : '' %>">
+              <a class="page-link" href="?page=<%= currentPage + 1 %>">Next</a>
+            </li>
+          </ul>
+        </nav>
+    </div>
+    </div>
+    
+    <script>
+      function confirmDelete() {
+        return confirm("Yakin menghapus?");
+      }
+      </script>
+  </main>
+</div>
+    

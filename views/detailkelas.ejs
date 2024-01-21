@@ -1,0 +1,87 @@
+<div class="wrapper-postingan">
+    <div class="wrapper-new">
+      <div class="title-detailKelas">
+        <p class="nama-folder"><%= kelas.title %></p>
+        <p><small><%= kelas.excerpt %></small></p>
+      </div>
+      <% if (user.role === 'dosen') { %>
+        <div class="item-new"> </div>
+      <% } else { %>
+        <% if(files.length > 0){ %>
+        <div class="item-new">
+          <p><small class="fst-italic">Delete for Re-submit</small></p>
+        </div>
+        <% } else { %>
+          <div class="item-new">
+            <a href="/upload/<%= kelas.id_kelas %>" class="new-project"><i class="bi bi-plus"></i> <span>New</span></a>
+          </div>
+        <% } %>
+      <% } %>
+     
+    </div>
+    <% if(user.role === 'dosen'){ %>
+      <% if (!filesToDsn) { %>
+        <span></span>
+        <% } else { %>
+          <% filesToDsn.forEach(function(file) { %>
+            <div class="postingan">
+              <span class="d-flex justify-content-space-between align-items-center">
+                <i class="bi bi-file-zip-fill" style="color: #e65656;"></i>
+                <a class="ms-3" >
+                  <%
+                  var fileName = file.file;
+                  var result = fileName.substring(fileName.indexOf('-') + 1);
+                  %>
+                  <%= result %>
+                </a>
+              </span>
+              <small><%= file.username %></small>
+              <small><%= fileSizeInKilobytes %></small>
+              <small><%= moment(file.created_at).format('LL LT') %></small>
+              <div>
+                <a href="#" class="bg-danger btn" onclick="confirmDelete('<%= file.id_upload %>')"><i class="bi bi-trash text-white"></i></a>
+                <a href="/beri-nilai/<%= file.id_upload %>/<%= file.id_user %>" class="bg-info btn"><i class="bi bi-info-circle text-white "></i></a>
+                <a href="/download/<%= file.id_user %>/<%= file.id_upload %>" style="background:#48758c;" class="btn"><i class="bi bi-download text-white"></i></a>
+              </div>
+            </div>
+            <% }); %> 
+          <% } %>
+      <% }else{ %>
+        <% if (!files) { %>
+          <span></span>
+          <% } else { %>
+            <% files.forEach(function(file) { %>
+              <div class="postingan">
+                <span class="d-flex justify-content-space-between align-items-center">
+                  <i class="bi bi-file-zip-fill" style="color: #e65656;"></i>
+                  <a class="ms-3">
+                    <%
+                    var fileName = file.file;
+                    var result = fileName.substring(fileName.indexOf('-') + 1);
+                    %>
+                    <%= result %>
+                  </a>
+                </span>
+                <small><%= file.username %></small>
+                <small><%= fileSizeInKilobytes %></small>
+                <small><%= moment(file.created_at).format('DD MMMM, YYYY hh:mm A') %></small>
+                <div>
+                  <a href="#" class="bg-danger btn" onclick="confirmDelete('<%= file.id_upload %>')"><i class="bi bi-trash text-white"></i></a>
+                  <a href="/download/<%= file.id_user %>/<%= file.id_upload %>" style="background:#48758c;" class="btn"><i class="bi bi-download text-white"></i></a>
+                </div>
+              </div>
+              <% }); %>
+            <% } %>
+        <% } %>
+    
+  </div>
+  
+  <script>
+    function confirmDelete(id_upload) {
+      var confirmation = confirm("Yakin menghapus?");
+      
+      if (confirmation) {
+        window.location.href = "/delete-file/" + id_upload;
+      }
+    }
+    </script>

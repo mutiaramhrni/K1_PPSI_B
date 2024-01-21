@@ -1,0 +1,47 @@
+<div class="d-flex" style="justify-content: center;align-items: center;">
+  <% if (user.role === 'dosen') { %>
+  <div class="item-new float-btn">
+    <% if (user.role === 'dosen') { %>
+      <a href="/buat-kelas">+</a>
+      <% } else { %>
+        <span></span>
+        <% } %>
+  </div>
+  <% } else { %>
+  <form class="form-pencarian w-50" action="/enroll" method="post">
+    <input type="text" name="enroll_key" placeholder="Masukan enroll key">
+    <button type="submit">Enroll</button>
+  </form>
+  <% } %>
+  
+</div>
+<div class="wrapper-projects">
+  <% if (user.role === 'dosen') { %>
+    <% kelasDsn.forEach(function(kelas) { %>
+      <div class="row-project row-user-projects">
+        <a href="/detailKelas/<%= kelas.id_kelas %>" class="title"><%= kelas.title %></a>
+        <div class="row-user d-flex justify-content-space-between align-items-center"> 
+          <% if(user.role === 'dosen') {%>
+          <a href="/detailKelas/<%= kelas.id_kelas %>" class="enter-enroll-a">Detail</a>
+          <% } else { %>
+            <a href="/detailKelas/<%= kelas.id_kelas %>" class="enter-enroll-a">Masuk</a>
+          <% } %>
+          <!-- <small class="text-secondary ms-4"><%= moment(kelas.created_at).fromNow() %></small> -->
+        </div>
+      </div>
+      
+    <% }); %>
+    <% } else { %>
+      <% kelas.forEach(function(kelas) { %>
+        <div class="row-project row-user-projects">
+          <a href="/detailKelas/<%= kelas.id_kelas %>" class="title"><%= kelas.title %></a>
+          <div class="row-user"> 
+            <a href="/detailKelas/<%= kelas.id_kelas %>" class="enter-enroll-a">Masuk</a>
+          </div>
+        </div>
+      <% }); %>
+      <% } %>
+  
+
+</div>
+

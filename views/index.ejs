@@ -1,0 +1,45 @@
+
+<div class="wrapper-items">
+  <% if(user.role === 'admin') { %>
+    <div class="item">
+        <div class="item-content">
+            <img src="img/layout.png" alt="Icon" width="80" height="80">
+            <div class="item-text">
+                <span>Dashboard</span>
+                <a href="/dashboard">Start</a>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+    <% } %>
+  <% if(user.role === 'dosen') { %>
+    <div class="item">
+        <div class="item-content">
+            <img src="img/iupload.png" alt="Icon" width="80" height="80">
+            <div class="item-text">
+                <span>Create New Class</span>
+                <a href="/kelas">Start</a>
+            </div>
+        </div>
+    </div>
+    <% } else { %>
+      <div class="item">
+        <div class="item-content">
+            <img src="img/iupload.png" alt="Icon" width="80" height="80">
+            <div class="item-text">
+                <span>Please upload your project on this folder</span>
+                <a href="/kelas">Start</a>
+            </div>
+        </div>
+    </div>
+    <% } %>
+    <div class="item">
+        <div class="item-content">
+            <img src="img/isearch.png" alt="Icon" width="80" height="80">
+            <div class="item-text">
+                <span>Click this section if you want to find references for various projects</span>
+                <a href="/pencarian">Start</a>
+            </div>
+        </div>
+    </div>
+    

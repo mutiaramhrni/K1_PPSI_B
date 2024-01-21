@@ -1,0 +1,29 @@
+<form class="form-pencarian" action="/search" method="get">
+  <input type="text" name="query" placeholder="Search..">
+  <button type="submit">Search</button>
+</form>
+<% if (results.length === 0) { %>
+  <p style="text-align:center;">No results found.</p>
+  <% } else { %>
+    <% results.forEach(function(file) { %>
+      <div class="postingan">
+        <span class="d-flex justify-content-space-between align-items-center">
+          <i class="bi bi-file-zip-fill"  style="color: #e65656;"></i>
+          <a class="ms-3">
+            <%
+            var fileName = file.file;
+            var result = fileName.substring(fileName.indexOf('-') + 1);
+            %>
+            <%= result %>
+          </a>
+        </span>
+        <small><%= file.username %></small>
+        <small><%= fileSizeInKilobytes %></small>
+        <small><%= moment(file.created_at).format('DD MMMM, YYYY hh:mm A') %></small>
+        <a href="/download/<%= file.id_user %>/<%= file.id_upload %>" style="background:#48758c;" class="btn"><i class="bi bi-download text-white"></i></a>
+      </div>
+  <% }); %>
+  <% } %>
+  
+  
+  
